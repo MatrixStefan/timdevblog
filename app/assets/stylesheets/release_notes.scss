@@ -1,0 +1,89 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+}
+
+.release-note-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f8f8f8;
+  margin: 24px 240px 24px 240px;
+  padding: 24px;
+  border-radius: 24px;
+}
+
+.release-note-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.release-note-title {
+  font-size: larger;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.release-note-intro {
+  font-size: small;
+  width: 100%;
+  text-align: start;
+  margin-left: 24px;
+  margin-bottom: 12px;
+}
+
+.release-note-outro {
+  font-size: small;
+  width: 100%;
+  text-align: start;
+  margin-left: 24px;
+  margin-top: 12px;
+}
+
+.release-note-items {
+  margin: 0 36px 0 36px;
+}
+
+.release-note-type {
+  border-radius: 8px;
+  background-color: #DADADA;
+  padding: 4px;
+  margin-left: 8px;
+  font-size: small;
+  font-weight: bold;
+  text-align: start;
+  width: 100%;
+}
+
+.release-note-item-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.release-note-item-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 24px;
+}
+
+.release-note-item-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.release-note-item-title {
+  font-size: small;
+  font-weight: bold;
+  text-align: start;
+  width: 100%;
+}
+
+.release-note-item-details {
+  font-size: small;
+  text-align: start;
+  width: 100%;
+}
