@@ -1,2 +1,26 @@
-<h1>ReleaseNotes#edit</h1>
-<p>Find me in app/views/release_notes/edit.html.erb</p>
+<div class="release-note-container">
+
+  <%= simple_form_for(@release_note, html: {class: 'form'}) do |f| %>
+    <div class="release-note-row">
+      <div class="release-note-title">
+        <%= f.input :title, html: {class: 'form-control input-sm wide-string-input'} %>
+      </div>
+    </div>
+
+    <div class="release-note-row">
+      <div class="release-note-date">
+        <%= f.input :release_date, as: :date, html5: true, html: {class: 'form-control input-sm'} %>
+      </div>
+    </div>
+
+    <%= f.input :intro %><br/>
+
+    <%= f.simple_fields_for :release_note_items do |release_note_item| %>
+      <%= render partial: 'release_notes/release_note_item_form', locals: {release_note_item: release_note_item} %>
+    <% end %>
+
+    <%= f.input :outro %><br/>
+    <%= f.button :submit, html: {class: 'btn btn-sm btn-primary'} %>
+  <% end %>
+
+</div>

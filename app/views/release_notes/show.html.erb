@@ -1,8 +1,15 @@
+<%= link_to 'View All', release_notes_path %>
+
 <div class="release-note-container">
 
   <div class="release-note-row">
     <div class="release-note-title">
       <%= @release_note.title %>
+    </div>
+  </div>
+  <div class="release-note-row">
+    <div class="release-note-date">
+      <%= @release_note.release_date.strftime("#{@release_note.release_date.day.ordinalize} %B %Y") %>
     </div>
   </div>
 
@@ -14,18 +21,20 @@
 
   <div class="release-note-items">
 
-    <% if @release_note.release_note_items.where('change_type = ?', 'New Feature').count > 0 %>
+    <% @release_note.release_note_items.joins(:change_type).order("priority").map(&:change_type_id).uniq.each do |type| %>
+
       <div class="release-note-type">
         <span class="fa-stack">
-          <i class="fas fa-sun fa-stack-2x"></i>
+          <i class="fas <%= ChangeType.find(type).icon %> fa-stack-2x"></i>
         </span>
-        New <%= 'Feature'.pluralize(@release_note.release_note_items.where('change_type = ?', 'New Feature').count) %>
+        <%= ChangeType.find(type).name.pluralize(2) %>
       </div>
-      <% @release_note.release_note_items.where('change_type = ?', 'New Feature').each do |item| %>
+
+      <% @release_note.release_note_items.where("change_type_id = ?", type).each do |item| %>
 
         <div class="release-note-item-row">
           <div class="release-note-item-icon">
-            <i class="fas fa-sun"></i>
+            <i class="fas <%= item.change_type.icon %>"></i>
           </div>
           <div class="release-note-item-col">
             <div class="release-note-item-title">
@@ -39,65 +48,9 @@
 
       <% end %>
 
-    <% end %>
-
-    <% if @release_note.release_note_items.where('change_type = ?', 'Bug Fix').count > 0 %>
-      <div class="release-note-type">
-        <span class="fa-stack">
-          <i class="fas fa-bug fa-stack-2x"></i>
-        </span>
-        Bug <%= 'Fix'.pluralize(@release_note.release_note_items.where('change_type = ?', 'Bug Fix').count) %>
-      </div>
-      <% @release_note.release_note_items.where('change_type = ?', 'Bug Fix').each do |item| %>
-
-        <div class="release-note-item-row">
-          <div class="release-note-item-icon">
-            <i class="fas fa-bug"></i>
-          </div>
-          <div class="release-note-item-col">
-            <div class="release-note-item-title">
-              <%= item.change_title %>
-            </div>
-            <div class="release-note-item-details">
-              <%= item.change_details %>
-            </div>
-          </div>
-        </div>
-
-      <% end %>
 
     <% end %>
 
-    <% if @release_note.release_note_items.where('change_type = ?', 'Enhancement').count > 0 %>
-      <div class="release-note-type">
-        <span class="fa-stack">
-          <i class="fas fa-certificate fa-stack-2x"></i>
-          <i class="fas fa-thumbs-up fa-stack-1x" style="color:white"></i>
-        </span>
-        <%= 'Enhancement'.pluralize(@release_note.release_note_items.where('change_type = ?', 'Enhancement').count) %>
-      </div>
-      <% @release_note.release_note_items.where('change_type = ?', 'Enhancement').each do |item| %>
-
-        <div class="release-note-item-row">
-          <div class="release-note-item-icon">
-            <span class="fa-stack fa-xs">
-              <i class="fas fa-certificate fa-stack-2x"></i>
-              <i class="fas fa-thumbs-up fa-stack-1x" style="color:white"></i>
-            </span>
-          </div>
-          <div class="release-note-item-col">
-            <div class="release-note-item-title">
-              <%= item.change_title %>
-            </div>
-            <div class="release-note-item-details">
-              <%= item.change_details %>
-            </div>
-          </div>
-        </div>
-
-      <% end %>
-
-    <% end %>
 
   </div>
 

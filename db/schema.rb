@@ -10,19 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_17_081311) do
+ActiveRecord::Schema.define(version: 2018_05_17_114532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "change_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "icon"
+    t.integer "priority"
+  end
+
   create_table "release_note_items", force: :cascade do |t|
     t.integer "user_id"
     t.integer "release_note_id"
-    t.string "change_type"
     t.string "change_title"
     t.text "change_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "change_type_id"
   end
 
   create_table "release_notes", force: :cascade do |t|

@@ -1,0 +1,20 @@
+<div class="release-note-type release-note-item-form-container">
+
+  <div class="release-note-item-form-change-type">
+    <%= release_note_item.input :change_type_id, collection: ChangeType.all, html: {class: 'form-control input-sm'} %>
+  </div>
+
+  <div class="release-note-item-form-change-title">
+    <%= release_note_item.input :change_title, html: {class: 'form-control input-sm'} %>
+  </div>
+
+
+  <div class="release-note-item-form-change-details">
+    <%= release_note_item.input :change_details, html: {class: 'form-control input-sm'} %>
+  </div>
+
+  <div class="release-note-item-add-button">
+    <button class="btn btn-sm btn-primary">Add</button>
+  </div>
+
+</div>
