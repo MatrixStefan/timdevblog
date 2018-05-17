@@ -25,7 +25,7 @@
   </div>
   <!-- Articles -->
   <div class="index-articles">
-    <% if @release_note.count > 0 %>
+    <% if @release_notes.count > 0 %>
       <% @release_notes.order(:release_date).each do |note| %>
 
         <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
