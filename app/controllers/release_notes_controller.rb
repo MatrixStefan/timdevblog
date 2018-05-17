@@ -1,4 +1,10 @@
 class ReleaseNotesController < ApplicationController
+
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
+
+  def index
+    @release_notes = ReleaseNote.all
+  end
   
   def new
   end

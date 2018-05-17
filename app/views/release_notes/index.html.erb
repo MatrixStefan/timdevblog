@@ -1,0 +1,36 @@
+<div class="index-container">
+
+  <!-- Left Menu -->
+  <div class="index-menu">
+    <ul class="nav nav-list">
+
+      <% @release_notes.select("release_date").map{ |d| d.release_date.year }.uniq.each do |year| %>
+
+        <li class="nav-header index-menu-year" data-toggle="collapse" data-target="#test">
+        <span>
+          <!-- YEAR --><%= year %>
+        </span>
+          <% @release_notes.where('extract(year from release_date) = ?', year).map{ |d| d.release_date.month }.each do |month| %>
+
+          <ul class="nav nav-list collapse index-menu-month" id="test" >
+            <%= t('date.month_names')[month] %>
+          </ul>
+
+          <% end %>
+        </li>
+
+
+      <% end %>
+
+    </ul>
+  </div>
+  <!-- Articles -->
+  <div class="index-articles">
+    <% @release_notes.order(:release_date).each do |note| %>
+
+      <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+
+    <% end %>
+  </div>
+
+</div>
