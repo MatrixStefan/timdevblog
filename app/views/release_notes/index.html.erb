@@ -7,7 +7,7 @@
 
 
         <li class="nav-header index-menu-year">
-        <span><%= year %></span>
+          <span><%= year %></span>
           <ul class="nav nav-list flex-column index-menu-month" id="<%= year %>">
             <% @release_notes.where('extract(year from release_date) = ?', year).map {|d| d.release_date.month}.uniq.each do |month| %>
 
@@ -25,10 +25,14 @@
   </div>
   <!-- Articles -->
   <div class="index-articles">
-    <% @release_notes.order(:release_date).each do |note| %>
+    <% if @release_note.count > 0 %>
+      <% @release_notes.order(:release_date).each do |note| %>
 
-      <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+        <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
 
+      <% end %>
+    <% else %>
+      You haven't published any release notes.
     <% end %>
   </div>
 
