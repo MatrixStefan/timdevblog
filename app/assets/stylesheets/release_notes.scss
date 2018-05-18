@@ -203,3 +203,16 @@ a.anchor {
 .btn {
   margin: 0 4px 0 4px;
 }
+
+.notice {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  padding-top: 64px;
+}

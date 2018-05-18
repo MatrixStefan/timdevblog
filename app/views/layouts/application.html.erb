@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Devblog</title>
+  <title>TIM Release Notes</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -13,37 +13,8 @@
 
 <body>
 <!-- topnav here -->
-<div class="top-nav">
-  <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top">
-    <div class="container">
-      <h2><%= link_to 'TIM Release Notes', release_notes_path %></h2>
+<%= render 'layouts/navbar' %>
 
-      <div class="nav-h">
-        <ul class="navbar-nav mr-auto">
-          <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to new_release_note_path do %>
-                <i class="fas fa-plus-circle" title="Create Release Note"></i>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to destroy_user_session_path, :method => :delete do %>
-                <i class="fas fa-sign-out-alt" title="Sign Out"></i>
-              <% end %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to new_user_session_path do %>
-                <i class="fas fa-sign-in-alt" title="Sign In"></i>
-              <% end %>
-            </li>
-          <% end %>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
