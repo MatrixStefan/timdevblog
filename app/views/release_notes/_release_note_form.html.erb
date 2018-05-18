@@ -1,6 +1,9 @@
 <div class="release-note-container">
 
   <%= simple_form_for(@release_note, html: {class: 'form'}) do |f| %>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
     <div class="release-note-row">
       <div class="release-note-title">
         <%= f.input :title, html: {class: 'form-control input-sm wide-string-input'} %>
