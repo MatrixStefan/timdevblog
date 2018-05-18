@@ -1,20 +1,23 @@
 <div class="release-note-type release-note-item-form-container">
+  <%= f.hidden_field :release_note_id, value: f.object.id %>
 
   <div class="release-note-item-form-change-type">
-    <%= release_note_item.input :change_type_id, collection: ChangeType.all, html: {class: 'form-control input-sm'} %>
+    <%= f.input :change_type_id, collection: ChangeType.all, allow_blank: false, html: {class: 'form-control input-sm'} %>
   </div>
 
   <div class="release-note-item-form-change-title">
-    <%= release_note_item.input :change_title, html: {class: 'form-control input-sm'} %>
+    <%= f.input :change_title, html: {class: 'form-control input-sm'} %>
   </div>
 
 
   <div class="release-note-item-form-change-details">
-    <%= release_note_item.input :change_details, html: {class: 'form-control input-sm'} %>
+    <%= f.input :change_details, html: {class: 'form-control input-sm'} %>
   </div>
 
   <div class="release-note-item-add-button">
-    <button class="btn btn-sm btn-primary">Add</button>
+    <%= link_to_remove_association f do%>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
   </div>
 
 </div>

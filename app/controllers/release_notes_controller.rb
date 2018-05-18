@@ -8,6 +8,7 @@ class ReleaseNotesController < ApplicationController
   
   def new
     @release_note = ReleaseNote.new
+    @release_note.release_note_items.build
   end
 
   def create
@@ -49,6 +50,6 @@ class ReleaseNotesController < ApplicationController
 
   def release_note_params
     params.require(:release_note).permit(:id, :title, :intro, :outro, :release_date, :published,
-                                         release_note_item_attributes: [:id, :change_type_id, :change_title, :change_details])
+                                         release_note_items_attributes: [:id, :release_note_id, :change_type_id, :change_title, :change_details, :_destroy])
   end
 end
