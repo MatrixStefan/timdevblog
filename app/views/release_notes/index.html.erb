@@ -2,33 +2,67 @@
 
   <!-- Left Menu -->
   <div class="index-menu">
-    <% @release_notes.select("release_date").order(release_date: :desc).map {|d| d.release_date.year}.uniq.each do |year| %>
-      <ul class="nav nav-list">
 
+    <% if user_signed_in? %>
 
-        <li class="nav-header index-menu-year">
-          <span><%= year %></span>
-          <ul class="nav nav-list flex-column index-menu-month" id="<%= year %>">
-            <% @release_notes.order(release_date: :desc).where('extract(year from release_date) = ?', year).map {|d| d.release_date.month}.uniq.each do |month| %>
+      <% @release_notes.select("release_date").order(release_date: :desc).map {|d| d.release_date.year}.uniq.each do |year| %>
+        <ul class="nav nav-list">
 
-              <li class="nav-item">
-                <%= link_to t('date.month_names')[month], '#' + t('date.month_names')[month] + '-' + year.to_s %>
-              </li>
+          <li class="nav-header index-menu-year">
+            <span><%= year %></span>
+            <ul class="nav nav-list flex-column index-menu-month" id="<%= year %>">
+              <% @release_notes.order(release_date: :desc).where('extract(year from release_date) = ?', year).map {|d| d.release_date.month}.uniq.each do |month| %>
 
-            <% end %>
-          </ul>
-        </li>
+                <li class="nav-item">
+                  <%= link_to t('date.month_names')[month], '#' + t('date.month_names')[month] + '-' + year.to_s %>
+                </li>
 
+              <% end %>
+            </ul>
+          </li>
 
-      </ul>
+        </ul>
+      <% end %>
+
+    <% else %>
+
+      <% @release_notes.published.select("release_date").order(release_date: :desc).map {|d| d.release_date.year}.uniq.each do |year| %>
+        <ul class="nav nav-list">
+
+          <li class="nav-header index-menu-year">
+            <span><%= year %></span>
+            <ul class="nav nav-list flex-column index-menu-month" id="<%= year %>">
+              <% @release_notes.published.order(release_date: :desc).where('extract(year from release_date) = ?', year).map {|d| d.release_date.month}.uniq.each do |month| %>
+
+                <li class="nav-item">
+                  <%= link_to t('date.month_names')[month], '#' + t('date.month_names')[month] + '-' + year.to_s %>
+                </li>
+
+              <% end %>
+            </ul>
+          </li>
+
+        </ul>
+      <% end %>
+
     <% end %>
   </div>
   <!-- Articles -->
   <div class="index-articles">
     <% if @release_notes.count > 0 %>
-      <% @release_notes.order(release_date: :desc).each do |note| %>
+      <% if user_signed_in? %>
+        <% @release_notes.order(release_date: :desc).each do |note| %>
 
-        <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+
+        <% end %>
+      <% else %>
+
+        <% @release_notes.published.order(release_date: :desc).each do |note| %>
+
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+
+        <% end %>
 
       <% end %>
     <% else %>

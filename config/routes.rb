@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get 'release_note_items/destroy'
   root to: "release_notes#index"
   devise_for :users
-  resources :release_notes
+  resources :release_notes do
+    member do
+      get :publish_toggle
+    end
+  end
 
 end

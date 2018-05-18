@@ -41,6 +41,25 @@ class ReleaseNotesController < ApplicationController
 
   def destroy
   end
+
+  def publish_toggle
+    set_release_note
+    if @release_note.published
+      if @release_note.update(published: false)
+        respond_to do |format|
+          flash[:notice] = 'Release Note unpublished'
+          format.html {redirect_to :release_notes}
+        end
+      end
+    else
+      if @release_note.update(published: true)
+        respond_to do |format|
+          flash[:notice] = 'Release Note published'
+          format.html {redirect_to :release_notes}
+        end
+      end
+    end
+  end
   
   private
   

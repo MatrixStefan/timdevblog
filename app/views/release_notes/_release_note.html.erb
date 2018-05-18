@@ -59,4 +59,17 @@
     </div>
   </div>
 
+  <% if user_signed_in? %>
+    <div class="release-note-row">
+      <div class="release-note-buttons">
+        <% if release_note.published %>
+          <%= link_to 'Unpublish', publish_toggle_release_note_path(:id => release_note.id), class: 'btn btn-sm btn-danger' %>
+        <% else %>
+          <%= link_to 'Edit', edit_release_note_path(:id => release_note.id), class: 'btn btn-sm btn-info' %>
+          <%= link_to 'Publish', publish_toggle_release_note_path(:id => release_note.id), class: 'btn btn-sm btn-success' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
 </div>

@@ -172,8 +172,10 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
-.centered-h {
-  text-align: center;
+.nav-h {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }
 
 .release-note-items-form {
@@ -188,4 +190,16 @@ a.anchor {
   position: relative;
   top: -64px;
   visibility: hidden;
+}
+
+.release-note-buttons {
+  margin: 8px 0 0 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 10%;
+}
+
+.btn {
+  margin: 0 4px 0 4px;
 }
