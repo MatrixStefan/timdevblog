@@ -121,6 +121,7 @@
 .index-articles {
   display:flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .wide-string-input {
@@ -229,4 +230,17 @@ a.anchor {
 
 .nav-bar-item {
   margin-left: 24px;
+}
+
+.search-results-container {
+  display: flex;
+  flex-direction: column;
+  font-size: smaller;
+  font-weight: lighter;
+  margin: 0 0 24px 240px;
+}
+
+.search-results-item {
+  display: flex;
+  flex-direction: row;
 }

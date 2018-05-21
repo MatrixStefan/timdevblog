@@ -1,0 +1,47 @@
+<div class="search-results-container">
+  <div class="search-results-item">
+    <em>Found <%= @search_results.count %> results in <%= @search_results.took / 1000.to_f %> seconds</em>
+  </div>
+</div>
+
+<div class="index-container">
+
+  <!-- Left Menu -->
+  <div class="index-menu">
+
+    <ul class="nav nav-list">
+
+      <li class="nav-header index-menu-year">
+        <ul class="nav nav-list flex-column index-menu-month" id="show_all">
+          <li class="nav-item">
+            <%= link_to 'Show All', release_notes_path %>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Search Results -->
+
+  <div class="index-articles">
+    <% if @search_results.count > 0 %>
+      <% if user_signed_in? %>
+        <% @search_results.each do |note| %>
+
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+
+        <% end %>
+      <% else %>
+
+        <% @search_results.published.each do |note| %>
+
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+
+        <% end %>
+
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

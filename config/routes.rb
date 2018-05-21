@@ -13,4 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :release_notes
+  get "search", to: "search#search"
+
 end

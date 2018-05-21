@@ -1,0 +1,6 @@
+<%= form_for :term, url: search_path, method: :get, html: {class: 'form-inline search-bar'} do |form| %>
+  <div class="form-group mb-2">
+    <%= text_field_tag :term, params[:term], placeholder: "Search", class: 'form-control input-sm search-bar' %>
+  </div>
+  <%= submit_tag "Search", name: nil, class: 'btn btn-sm btn-secondary mb-2' %>
+<% end %>

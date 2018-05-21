@@ -4,6 +4,7 @@
       <h2><%= link_to 'TIM Release Notes', release_notes_path %></h2>
 
       <div class="nav-h">
+        <%= render 'layouts/nav_search' %>
           <% if user_signed_in? %>
               <%= link_to new_release_note_path do %>
                 <i class="fas fa-plus-circle nav-bar-item" title="Create Release Note"></i>
