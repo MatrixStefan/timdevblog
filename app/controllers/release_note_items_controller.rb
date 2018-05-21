@@ -1,4 +1,7 @@
 class ReleaseNoteItemsController < ApplicationController
+
+  before_action :set_release_note_item, only: [:edit, :update, :destroy]
+
   def new
     @release_note_item = ReleaseNoteItem.new
   end
@@ -9,23 +12,25 @@ class ReleaseNoteItemsController < ApplicationController
   end
 
   def edit
-    set_release_note_item
   end
 
   def update
-    set_release_note_item
     @release_note_item.update(release_note_item_params)
   end
 
   def destroy
-    set_release_note_item
     @release_note_item.destroy
+    respond_to do |format|
+      format.html {render new_release_note_path }
+      format.json {head :no_content}
+    end
   end
   
   private
   
   def set_release_note_item
     @release_note_item = ReleaseNoteItem.find(params[:id])
+    puts 'Working on Release Note Item ' + @release_note_item.id.to_s
   end
   
   def release_note_item_params

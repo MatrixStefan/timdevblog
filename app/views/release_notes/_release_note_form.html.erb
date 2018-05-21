@@ -18,16 +18,16 @@
 
     <%= f.input :intro %><br/>
 
+    Release Note Items:
     <div class="release-note-items-form">
-
       <%= f.simple_fields_for :release_note_items do |rni| %>
         <%= render 'release_notes/release_note_item_form', f: rni %>
-        <div>
-          <%= link_to_add_association f, :release_note_items, partial: 'release_notes/release_note_item_form' do %>
-            <i class="fas fa-plus-square"></i>
-          <% end %>
-        </div>
       <% end %>
+      <div>
+        <%= link_to_add_association f, :release_note_items, partial: 'release_notes/release_note_item_form' do %>
+          <i class="fas fa-plus-square add"></i>
+        <% end %>
+      </div>
 
     </div>
     <%= f.input :outro %><br/>

@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 .release-note-container {
   display: flex;
   flex-direction: column;
@@ -215,4 +217,16 @@ a.anchor {
   z-index: 100;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
   padding-top: 64px;
+}
+
+.delete {
+  color: $danger;
+}
+
+.add {
+  color: $success;
+}
+
+.nav-bar-item {
+  margin-left: 24px;
 }

@@ -13,12 +13,20 @@ class ReleaseNotesController < ApplicationController
 
   def create
     @release_note = ReleaseNote.new(release_note_params)
-    if @release_note.save!
+
+    begin
+      if @release_note.save!
+        respond_to do |format|
+          flash[:notice] = 'Release Note created'
+          format.html {redirect_to @release_note}
+        end
+      end
+    rescue ActiveRecord::RecordInvalid => invalid
       respond_to do |format|
-        flash[:notice] = 'Release Note created'
-        format.html {redirect_to @release_note}
+        format.html {render new_release_note_path}
       end
     end
+
   end
 
   def update
@@ -68,7 +76,7 @@ class ReleaseNotesController < ApplicationController
   end
 
   def release_note_params
-    params.require(:release_note).permit(:id, :title, :intro, :outro, :release_date, :published,
-                                         release_note_items_attributes: [:id, :release_note_id, :change_type_id, :change_title, :change_details, :_destroy])
+    params.require(:release_note).permit(:id, :user_id, :title, :intro, :outro, :release_date, :published,
+                                         release_note_items_attributes: [:id, :user_id, :release_note_id, :change_type_id, :change_title, :change_details, :_destroy])
   end
 end

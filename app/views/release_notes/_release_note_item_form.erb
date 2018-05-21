@@ -1,5 +1,6 @@
-<div class="release-note-type release-note-item-form-container">
+<div class="release-note-type release-note-item-form-container nested-fields">
   <%= f.hidden_field :release_note_id, value: f.object.id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
   <div class="release-note-item-form-change-type">
     <%= f.input :change_type_id, collection: ChangeType.all, allow_blank: false, html: {class: 'form-control input-sm'} %>
@@ -15,8 +16,8 @@
   </div>
 
   <div class="release-note-item-add-button">
-    <%= link_to_remove_association f do%>
-      <i class="fas fa-trash-alt"></i>
+    <%= link_to_remove_association f do %>
+      <i class="fas fa-trash-alt delete"></i>
     <% end %>
   </div>
 
