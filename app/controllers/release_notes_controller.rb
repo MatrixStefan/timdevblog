@@ -84,6 +84,7 @@ class ReleaseNotesController < ApplicationController
     puts "request #{req.body}"
 
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.use_ssl = true
       http.request(req)
     end
 
