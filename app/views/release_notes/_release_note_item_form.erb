@@ -1,5 +1,5 @@
 <div class="release-note-type release-note-item-form-container nested-fields">
-  <%= f.hidden_field :release_note_id, value: f.object.id %>
+  <%= f.hidden_field :release_note_id, value: f.object.release_note.id %>
   <%= f.hidden_field :user_id, value: current_user.id %>
 
   <div class="release-note-item-form-change-type">
