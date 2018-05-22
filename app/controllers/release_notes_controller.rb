@@ -75,10 +75,11 @@ class ReleaseNotesController < ApplicationController
 
   def notify
     set_release_note
-    domain = (ENV['TIM_URL'] || 'https://0.0.0.0:3000')
+    domain = (ENV['TIM_URL'] || 'http://0.0.0.0:3000')
 
     url = URI.parse(domain) + '/receive_webhooks'
     req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
+    req.body = { origin: "TIM-Release-Notes", title: @release_note.title}.to_json
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = (url.scheme == "https")
     response = http.request(req)
@@ -86,14 +87,9 @@ class ReleaseNotesController < ApplicationController
 
     #uri = URI(url)
     #req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
-    #req.body = { origin: "TIM-Release-Notes", title: @release_note.title}.to_json
+    #n
 
     puts "request #{req.body}"
-
-    #res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-    #  http.use_ssl = true
-    #  http.request(req)
-    #end
 
     puts "response #{response.body}"
 
