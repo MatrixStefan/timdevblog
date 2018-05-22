@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <%= f.input :intro %><br/>
+    <%= f.input :intro, label: 'Intro (HTML safe)' %><br/>
 
     Release Note Items:
     <div class="release-note-items-form">
@@ -30,7 +30,7 @@
       </div>
 
     </div>
-    <%= f.input :outro %><br/>
+    <%= f.input :outro, label: 'Outro (HTML safe)' %><br/>
     <%= f.button :submit, class: 'btn btn-sm btn-primary' %>
   <% end %>
 

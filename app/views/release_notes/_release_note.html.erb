@@ -14,7 +14,7 @@
 
   <div class="release-note-row">
     <div class="release-note-intro">
-      <%= release_note.intro %>
+      <%= release_note.intro.html_safe %>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
               <%= item.change_title %>
             </div>
             <div class="release-note-item-details">
-              <%= item.change_details %>
+              <%= item.change_details.html_safe %>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
 
   <div class="release-note-row">
     <div class="release-note-outro">
-      <%= release_note.outro %>
+      <%= release_note.outro.html_safe %>
     </div>
   </div>
 
