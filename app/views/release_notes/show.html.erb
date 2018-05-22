@@ -1,63 +1,17 @@
-<%= link_to 'View All', release_notes_path %>
+<!-- Left Menu -->
+<div class="index-menu">
 
-<div class="release-note-container">
+  <ul class="nav nav-list">
 
-  <div class="release-note-row">
-    <div class="release-note-title">
-      <%= @release_note.title %>
-    </div>
-  </div>
-  <div class="release-note-row">
-    <div class="release-note-date">
-      <%= @release_note.release_date.strftime("#{@release_note.release_date.day.ordinalize} %B %Y") %>
-    </div>
-  </div>
+    <li class="nav-header index-menu-year">
+      <ul class="nav nav-list flex-column index-menu-month" id="show_all">
+        <li class="nav-item">
+          <%= link_to 'Show All', release_notes_path %>
+        </li>
+      </ul>
+    </li>
 
-  <div class="release-note-row">
-    <div class="release-note-intro">
-      <%= @release_note.intro %>
-    </div>
-  </div>
-
-  <div class="release-note-items">
-
-    <% @release_note.release_note_items.joins(:change_type).order("priority").map(&:change_type_id).uniq.each do |type| %>
-
-      <div class="release-note-type">
-        <span class="fa-stack">
-          <i class="fas <%= ChangeType.find(type).icon %> fa-stack-2x"></i>
-        </span>
-        <%= ChangeType.find(type).name.pluralize(2) %>
-      </div>
-
-      <% @release_note.release_note_items.where("change_type_id = ?", type).each do |item| %>
-
-        <div class="release-note-item-row">
-          <div class="release-note-item-icon">
-            <i class="fas <%= item.change_type.icon %>"></i>
-          </div>
-          <div class="release-note-item-col">
-            <div class="release-note-item-title">
-              <%= item.change_title %>
-            </div>
-            <div class="release-note-item-details">
-              <%= item.change_details %>
-            </div>
-          </div>
-        </div>
-
-      <% end %>
-
-
-    <% end %>
-
-
-  </div>
-
-  <div class="release-note-row">
-    <div class="release-note-outro">
-      <%= @release_note.outro %>
-    </div>
-  </div>
-
+  </ul>
 </div>
+
+<%= render partial: 'release_notes/release_note', locals: {release_note: @release_note} %>
