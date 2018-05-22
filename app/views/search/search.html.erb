@@ -34,9 +34,13 @@
         <% end %>
       <% else %>
 
-        <% @search_results.published.each do |note| %>
+        <% @search_results.each do |note| %>
 
-          <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+          <% if note.published %>
+
+            <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+
+          <% end %>
 
         <% end %>
 

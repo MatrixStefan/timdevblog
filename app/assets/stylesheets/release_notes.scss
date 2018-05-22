@@ -161,6 +161,9 @@
 }
 
 .top-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   width: 100%;
   position: fixed;
   top: 0;
@@ -173,12 +176,22 @@
     text-decoration: none;
   }
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  padding: 0 240px 0 240px;
 }
 
 .nav-h {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-right-panel {
+  display: flex;
+  flex-direction: row;
   justify-content: end;
+  align-content: center;
+  margin-top: 8px;
 }
 
 .release-note-items-form {
@@ -208,16 +221,9 @@ a.anchor {
 }
 
 .notice {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
   text-align: center;
-  background-color: rgba(0, 0, 0, 1);
   color: white;
   z-index: 100;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-  padding-top: 64px;
 }
 
 .delete {
@@ -243,4 +249,24 @@ a.anchor {
 .search-results-item {
   display: flex;
   flex-direction: row;
+}
+
+.nav-bar-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav-bar-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  text-align: center;
+  height: 24px;
+}
+
+.main-layout {
+  padding-top: 80px;
 }
