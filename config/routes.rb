@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :release_notes do
     member do
       get :publish_toggle
+      get :notify
     end
   end
 

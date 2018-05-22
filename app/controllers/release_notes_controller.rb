@@ -68,6 +68,30 @@ class ReleaseNotesController < ApplicationController
       end
     end
   end
+
+  def tim_rn_signature
+    'hbeue57uERSTGSG+5tyvagsrtAE%BYawg9uaethdgekvyioetS+RT_Wt85asghsiufunvgv5$%$%^4ihbcshjrvy5n$%^&*WDnsduvg93'
+  end
+
+  def notify
+    set_release_note
+    uri = URI(ENV['TIM_URL'] + '/receive_webhooks')
+    req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
+    req.body = { origin: "TIM-Release-Notes", title: @release_note.title}.to_json
+
+    puts "request #{req.body}"
+
+    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.request(req)
+    end
+
+    puts "response #{res.body}"
+
+    respond_to do |format|
+      flash[:notice] = 'Notification Sent'
+      format.html {redirect_to :release_notes}
+    end
+  end
   
   private
   
