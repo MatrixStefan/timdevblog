@@ -16,7 +16,7 @@ class SearchController < ApplicationController
           format.html {redirect_to :release_notes}
         end
       else
-        flash[:notice] = 'We found ' + @search_results.count.to_s + ' results in ' + ((@search_results.took/1000).to_f).to_s + ' seconds'
+        flash[:notice] = 'We found ' + @search_results.count.to_s + ' results in ' + @search_results.took.to_s + ' milliseconds'
       end
     end
   end

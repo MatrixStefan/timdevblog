@@ -7,6 +7,7 @@ class ReleaseNote < ApplicationRecord
 
   validates :release_date, :title, :presence => true
 
+
   scope :published, -> {where(published: true)}
   
 end
