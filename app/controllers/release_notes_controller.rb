@@ -77,8 +77,6 @@ class ReleaseNotesController < ApplicationController
     set_release_note
     url = (ENV['TIM_URL'] || 'https://0.0.0.0:3000') + '/receive_webhooks'
 
-    puts '################ URL: ' + url
-
     uri = URI(url)
     req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
     req.body = { origin: "TIM-Release-Notes", title: @release_note.title}.to_json
