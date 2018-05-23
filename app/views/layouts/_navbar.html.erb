@@ -2,7 +2,7 @@
     <div class="nav-bar-col">
       <div class="nav-h">
 
-        <h2><%= link_to 'TIM Release Notes', release_notes_path %></h2>
+        <h2><%= link_to ENV['TIM_RN_SITE_NAME'], release_notes_path %></h2>
 
         <div class="nav-right-panel">
           <%= render 'layouts/nav_search' %>

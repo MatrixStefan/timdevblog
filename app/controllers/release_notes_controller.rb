@@ -70,13 +70,15 @@ class ReleaseNotesController < ApplicationController
   end
 
   def tim_rn_signature
-    sig = 'hbeue57uERSTGSG+5tyvagsrtAE%BYawg9uaethdgekvyioetS+RT_Wt85asghsiufunvgv5$%$%^4ihbcshjrvy5n$%^&*WDnsduvg93'
+    sig = ENV['TIM_RN_RELEASE_NOTES_KEY']
     Obfuscate.new.encrypt(sig)
   end
 
   def notify
     release_note = set_release_note
-    domain = (ENV['TIM_URL'] || 'http://0.0.0.0:3000')
+    domain = ENV['TIM_URL']
+
+    puts 'Domain: ' + domain.to_s
 
     url = URI.parse(domain) + '/receive_webhooks'
     req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
