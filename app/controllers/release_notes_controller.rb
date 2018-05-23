@@ -70,7 +70,8 @@ class ReleaseNotesController < ApplicationController
   end
 
   def tim_rn_signature
-    'hbeue57uERSTGSG+5tyvagsrtAE%BYawg9uaethdgekvyioetS+RT_Wt85asghsiufunvgv5$%$%^4ihbcshjrvy5n$%^&*WDnsduvg93'
+    sig = 'hbeue57uERSTGSG+5tyvagsrtAE%BYawg9uaethdgekvyioetS+RT_Wt85asghsiufunvgv5$%$%^4ihbcshjrvy5n$%^&*WDnsduvg93'
+    Obfuscate.new.encrypt(sig)
   end
 
   def notify
