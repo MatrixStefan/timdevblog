@@ -8,7 +8,7 @@ class SearchController < ApplicationController
       end
     else
       result_count = 0
-      @search_results = ReleaseNote.search(params[:term], order: {release_date: :desc}, highlight:{tag: "<strong>"})
+      @search_results = ReleaseNote.search(params[:term], order: {release_date: :desc, id: :desc}, highlight:{tag: "<strong>"})
 
       if user_signed_in?
         result_count = @search_results.count

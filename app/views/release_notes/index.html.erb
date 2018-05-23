@@ -51,14 +51,14 @@
   <div class="index-articles">
     <% if @release_notes.count > 0 %>
       <% if user_signed_in? %>
-        <% @release_notes.order(release_date: :desc).each do |note| %>
+        <% @release_notes.order(release_date: :desc, id: :desc).each do |note| %>
 
           <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
 
         <% end %>
       <% else %>
 
-        <% @release_notes.published.order(release_date: :desc).each do |note| %>
+        <% @release_notes.published.order(release_date: :desc, id: :desc).each do |note| %>
 
           <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
 
