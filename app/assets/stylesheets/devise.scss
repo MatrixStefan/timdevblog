@@ -1,0 +1,27 @@
+.devise-form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  padding: 80px;
+}
+
+.devise-form {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  padding: 24px;
+
+  background-color: rgba(0, 0, 0, 0.03);//#eaf1f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.devise-shared-links {
+  font-size: small;
+  padding: 4px;
+}
+
+.devise-checkbox {
+  padding-left: 4px;
+}
