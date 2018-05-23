@@ -30,8 +30,8 @@ class ReleaseNotesController < ApplicationController
   end
 
   def update
-    set_release_note
-    if @release_note.update(release_note_params)
+    release_note = set_release_note
+    if release_note.update(release_note_params)
       respond_to do |format|
         flash[:notice] = 'Release Note updated'
         format.html {redirect_to @release_note}
@@ -51,16 +51,16 @@ class ReleaseNotesController < ApplicationController
   end
 
   def publish_toggle
-    set_release_note
-    if @release_note.published
-      if @release_note.update(published: false)
+    release_note = set_release_note
+    if release_note.published
+      if release_note.update(published: false)
         respond_to do |format|
           flash[:notice] = 'Release Note unpublished'
           format.html {redirect_to :release_notes}
         end
       end
     else
-      if @release_note.update(published: true)
+      if release_note.update(published: true)
         respond_to do |format|
           flash[:notice] = 'Release Note published'
           format.html {redirect_to :release_notes}
@@ -74,12 +74,12 @@ class ReleaseNotesController < ApplicationController
   end
 
   def notify
-    set_release_note
+    release_note = set_release_note
     domain = (ENV['TIM_URL'] || 'http://0.0.0.0:3000')
 
     url = URI.parse(domain) + '/receive_webhooks'
     req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
-    req.body = { origin: "TIM-Release-Notes", title: @release_note.title}.to_json
+    req.body = { origin: "TIM-Release-Notes", title: release_note.title, rnid: release_note.id}.to_json
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = (url.scheme == "https")
     response = http.request(req)
