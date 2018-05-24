@@ -6,7 +6,7 @@
 
         <div class="nav-right-panel">
           <%= render 'layouts/nav_search' %>
-          <% if user_signed_in? %>
+          <% if user_signed_in? && current_user.dev %>
             <%= link_to new_release_note_path do %>
               <i class="fas fa-plus-circle nav-bar-item" title="Create Release Note"></i>
             <% end %>

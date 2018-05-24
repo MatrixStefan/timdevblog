@@ -3,7 +3,7 @@
   <!-- Left Menu -->
   <div class="index-menu">
 
-    <% if user_signed_in? %>
+    <% if user_signed_in? && current_user.dev %>
 
       <% @release_notes.order(release_date: :desc).map {|d| d.release_date.year}.uniq.each do |year| %>
         <ul class="nav nav-list">
@@ -49,8 +49,8 @@
   </div>
   <!-- Articles -->
   <div class="index-articles">
-    <% if @release_notes.count > 0 %>
-      <% if user_signed_in? %>
+    <% if user_signed_in? && current_user.dev %>
+      <% if @release_notes.count > 0 %>
         <% @release_notes.order(release_date: :desc, id: :desc).each do |note| %>
 
           <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
@@ -58,20 +58,24 @@
         <% end %>
       <% else %>
 
+        <%= render 'release_notes/no_release_notes' %>
+
+      <% end %>
+
+    <% else %>
+
+      <% if @release_notes.published.count > 0 %>
         <% @release_notes.published.order(release_date: :desc, id: :desc).each do |note| %>
 
           <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
 
         <% end %>
+      <% else %>
+
+        <%= render 'release_notes/no_release_notes' %>
 
       <% end %>
-    <% else %>
-      <div class="release-note-container">
-        <div class="center">Uh-oh! There are no release notes yet <i class="far fa-frown"></i></div>
-        <% if user_signed_in? %>
-          <div class="center"><br/><%= link_to Faker::Simpsons.quote, new_release_note_path, class: 'btn btn-sm btn-primary' %></div>
-        <% end %>
-      </div>
+
     <% end %>
   </div>
 
