@@ -16,7 +16,7 @@ class Dev
                                       title: Faker::Simpsons.quote,
                                       release_date: Faker::Date.between(1.years.ago, Date.today),
                                       intro: Faker::RickAndMorty.quote,
-                                      outro: Faker.StarWars.quote,
+                                      outro: Faker::StarWars.quote,
                                       user_id: 1
         )
 
@@ -25,7 +25,7 @@ class Dev
               change_type_id: rand(1..3),
               user_id: 1,
               release_note_id: @random_note.id,
-              change_title: Faker::TheITCrowd.quote,
+              change_title: Faker::BackToTheFuture.quote,
               change_details: Faker::TheFreshPrinceOfBelAir.quote
           )
         end

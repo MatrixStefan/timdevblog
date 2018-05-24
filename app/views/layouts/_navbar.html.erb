@@ -6,13 +6,18 @@
 
         <div class="nav-right-panel">
           <%= render 'layouts/nav_search' %>
-          <% if user_signed_in? && current_user.dev %>
-            <%= link_to new_release_note_path do %>
-              <i class="fas fa-plus-circle nav-bar-item" title="Create Release Note"></i>
+          <% if user_signed_in? %>
+
+            <% if current_user.dev %>
+              <%= link_to new_release_note_path do %>
+                <i class="fas fa-plus-circle nav-bar-item" title="Create Release Note"></i>
+              <% end %>
             <% end %>
+
             <%= link_to destroy_user_session_path, :method => :delete do %>
               <i class="fas fa-sign-out-alt nav-bar-item" title="Sign Out"></i>
             <% end %>
+
           <% else %>
             <%= link_to new_user_session_path do %>
               <i class="fas fa-sign-in-alt nav-bar-item" title="Sign In"></i>
