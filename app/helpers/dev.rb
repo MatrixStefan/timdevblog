@@ -12,10 +12,22 @@ class Dev
     if dev
       number.times do
 
-        @random_note = FactoryBot.create(:release_note, user_id: 1)
+        @random_note = ReleaseNote.create(
+                                      title: Faker::Simpsons.quote,
+                                      release_date: Faker::Date.between(1.years.ago, Date.today),
+                                      intro: Faker::RickAndMorty.quote,
+                                      outro: Faker.StarWars.quote,
+                                      user_id: 1
+        )
 
         rand(1..15).times do
-          FactoryBot.create(:release_note_item, change_type_id: rand(1..3), user_id: 1, release_note_id: @random_note.id)
+          ReleaseNoteItem.create(
+              change_type_id: rand(1..3),
+              user_id: 1,
+              release_note_id: @random_note.id,
+              change_title: Faker::TheITCrowd.quote,
+              change_details: Faker::TheFreshPrinceOfBelAir.quote
+          )
         end
 
       end
