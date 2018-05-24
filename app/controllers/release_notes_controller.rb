@@ -48,6 +48,10 @@ class ReleaseNotesController < ApplicationController
   end
 
   def destroy
+    release_note = set_release_note
+    release_note.release_note_items.each do |rni|
+      rni.destroy
+    end
   end
 
   def publish_toggle

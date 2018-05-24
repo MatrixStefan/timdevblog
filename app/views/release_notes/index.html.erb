@@ -66,7 +66,12 @@
 
       <% end %>
     <% else %>
-      You haven't published any release notes.
+      <div class="release-note-container">
+        <div class="center">Uh-oh! There are no release notes yet <i class="far fa-frown"></i></div>
+        <% if user_signed_in? %>
+          <div class="center"><br/><%= link_to Faker::Simpsons.quote, new_release_note_path, class: 'btn btn-sm btn-primary' %></div>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

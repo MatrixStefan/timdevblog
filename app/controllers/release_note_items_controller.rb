@@ -19,11 +19,13 @@ class ReleaseNoteItemsController < ApplicationController
   end
 
   def destroy
+=begin
     @release_note_item.destroy
     respond_to do |format|
-      format.html {render new_release_note_path }
+      format.html {render new_release_note_path}
       format.json {head :no_content}
     end
+=end
   end
   
   private

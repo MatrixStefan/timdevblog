@@ -2,31 +2,31 @@ development:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: devblog
   username: postgres
   password: letmein
   host: localhost
   encoding: utf8
   port: 5432
+  database: devblog
 
 test:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: devblog
   username: postgres
   password: letmein
   host: localhost
   encoding: utf8
   port: 5432
+  database: devblog_test
 
 production:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: devblog
   username: postgres
   password: letmein
   host: localhost
   encoding: utf8
   port: 5432
+  database: devblog

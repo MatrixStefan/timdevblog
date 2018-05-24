@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :release_notes
+  has_many :release_note_items
+
   def active_for_authentication?
     super && approved?
   end
