@@ -25,5 +25,34 @@ class User < ApplicationRecord
       super # Use whatever other message
     end
   end
+
+  def full_name
+    [first_name, last_name].join(' ')
+  end
+
+  def pref_name
+    case self.preferred_name
+      when 0
+        first_name
+      when 1
+        last_name
+      when 2
+        nickname
+      when 3
+        [first_name, last_name].join(' ')
+      when 4
+        [first_name, '"' + nickname + '"', last_name].join(' ')
+      when 5
+        [nickname, first_name].join(' ')
+      when 6
+        [nickname, last_name].join(' ')
+      when 7
+        [first_name, nickname].join(' ')
+      when 8
+        [last_name, nickname].join(' ')
+      else
+        first_name
+    end
+  end
   
 end

@@ -1,0 +1,13 @@
+<% flash.each do |name, msg| %>
+  <div id="flash" class="notice">
+    <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+    $('document').ready(function () {
+        setTimeout(function () {
+            $('#flash').slideUp();
+        }, 3000);
+    });
+</script>

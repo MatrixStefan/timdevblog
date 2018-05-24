@@ -13,19 +13,34 @@
           <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
         <% end %>
 
+        <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+        <%= f.input :first_name, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+        <%= f.input :last_name, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+        <%= f.input :nickname, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+        <%= f.input :job_title, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+        <%= f.input :preferred_name, collection: [
+            [resource.first_name, "0"],
+            [resource.last_name, "1"],
+            [resource.nickname, "2"],
+            [[resource.first_name, resource.last_name].join(' '), "3"],
+            [[resource.first_name, '"' + resource.nickname + '"', resource.last_name].join(' '), "4"],
+            [[resource.nickname, resource.first_name].join(' '), "5"],
+            [[resource.nickname, resource.last_name].join(' '), "6"],
+            [[resource.first_name, resource.nickname].join(' '), "7"],
+            [[resource.last_name, resource.nickname].join(' '), "8"]
+        ], include_blank: false, hint:"changes to your name won't show here until you hit save", required: false %>
         <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
         <%= f.input :password_confirmation, required: false %>
-        <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Update", class: 'btn btn-sm btn-primary' %>
+        <%= f.button :submit, "Save", class: 'btn btn-sm btn-primary' %>
       </div>
     <% end %>
 
     <h3>Cancel my account</h3>
 
-    <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: {confirm: "Are you sure?"}, method: :delete %></p>
+    <p>Unhappy?<%= link_to "Cancel my account", registration_path(resource_name), data: {confirm: "Are you sure?"}, method: :delete %></p>
 
     <%= link_to "Back", :back %>
   </div>

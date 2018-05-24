@@ -52,6 +52,12 @@ class ReleaseNotesController < ApplicationController
     release_note.release_note_items.each do |rni|
       rni.destroy
     end
+    if release_note.destroy
+      respond_to do |format|
+        flash[:notice] = 'Release Note deleted'
+        format.html {redirect_to :release_notes}
+      end
+    end
   end
 
   def publish_toggle

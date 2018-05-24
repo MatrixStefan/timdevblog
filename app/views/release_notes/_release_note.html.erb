@@ -56,6 +56,13 @@
       <%= release_note.outro.html_safe %>
     </div>
   </div>
+  
+  <div class="release-note-row">
+    <div class="release-note-signed-by">
+      <hr />
+      <%= release_note.user.pref_name %>, <%= release_note.user.job_title %>
+    </div>
+  </div>
 
   <% if user_signed_in? && current_user.dev %>
     <div class="release-note-row">
@@ -66,10 +73,10 @@
         <% else %>
           <%= link_to 'Edit', edit_release_note_path(:id => release_note.id), class: 'btn btn-sm btn-info' %>
           <%= link_to 'Publish', publish_toggle_release_note_path(:id => release_note.id), class: 'btn btn-sm btn-success' %>
+          <%= link_to 'Delete', release_note_path(release_note), :method => :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger' %>
         <% end %>
       </div>
     </div>
-  <% end
-      %>
+  <% end %>
 
 </div>

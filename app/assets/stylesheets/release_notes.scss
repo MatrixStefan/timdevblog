@@ -47,6 +47,16 @@
   margin-top: 12px;
 }
 
+.release-note-signed-by {
+  font-size: x-small;
+  font-weight: lighter;
+  font-style: italic;
+  width: 100%;
+  text-align: end;
+  margin-left: 24px;
+  margin-top: 12px;
+}
+
 .release-note-items {
   margin: 0 36px 0 36px;
 }
@@ -162,7 +172,7 @@
 
 .top-nav {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   width: 100%;
   position: fixed;
@@ -176,7 +186,8 @@
     text-decoration: none;
   }
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-  padding: 0 240px 0 240px;
+  margin-top: -500px;
+  padding: 500px 240px 0 240px;
 }
 
 .nav-h {
@@ -184,14 +195,23 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  margin-top: 8px;
 }
 
-.nav-right-panel {
+.nav-right-panel-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-content: end;
+}
+
+.nav-right-panel-row {
   display: flex;
   flex-direction: row;
   justify-content: end;
-  align-content: center;
-  margin-top: 8px;
+  align-content: end;
+  padding-left: 12px;
+  text-align: end;
 }
 
 .release-note-items-form {
@@ -221,9 +241,14 @@ a.anchor {
 }
 
 .notice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   text-align: center;
   color: white;
   z-index: 100;
+  background: #1c1c1c;
+  width: 100%;
 }
 
 .delete {

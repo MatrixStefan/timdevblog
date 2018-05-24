@@ -1,16 +1,24 @@
 <div class="top-nav">
-    <div class="nav-bar-col">
-      <div class="nav-h">
+  <div class="nav-h">
 
-        <h2><%= link_to ENV['TIM_RN_SITE_NAME'], release_notes_path %></h2>
+    <h2><%= link_to ENV['TIM_RN_SITE_NAME'], release_notes_path %></h2>
+    <div class="nav-right-panel-row">
 
-        <div class="nav-right-panel">
-          <%= render 'layouts/nav_search' %>
+      <div class="nav-right-panel-col">
+        <%= render 'layouts/nav_search' %>
+      </div>
+
+      <div class="nav-right-panel-col">
+        <div class="nav-right-panel-row">
           <% if user_signed_in? %>
 
             <% if current_user.dev %>
               <%= link_to new_release_note_path do %>
                 <i class="fas fa-plus-circle nav-bar-item" title="Create Release Note"></i>
+              <% end %>
+
+              <%= link_to edit_user_registration_path do %>
+                <i class="fas fa-user-edit nav-bar-item" title="Edit User Profile"></i>
               <% end %>
             <% end %>
 
@@ -24,11 +32,14 @@
             <% end %>
           <% end %>
         </div>
-      </div>
 
-      <div class="nav-bar-row">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <div class="nav-right-panel-row">
+          <div class="nav-bar-item">
+            <small>Hello<% if user_signed_in? %>, <%= current_user.pref_name %><% end %>!</small>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+  <%= render 'layouts/nav_flash' %>
 </div>
