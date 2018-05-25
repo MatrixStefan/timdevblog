@@ -209,4 +209,44 @@ RSpec.describe User, type: :model do
     expect(user.pref_name).to eq 'Bookworm Cheesemeister'
   end
 
+  it "only returns dev user through the dev scope" do
+
+    dev_user = FactoryBot.create(:user, dev: true)
+    non_dev_user = FactoryBot.create(:user, dev: false)
+
+    expect(User.dev).to include(dev_user)
+    expect(User.dev).to_not include(non_dev_user)
+  end
+
+  it "only returns end users through the end_user scope" do
+
+    dev_user = FactoryBot.create(:user, dev: true)
+    non_dev_user = FactoryBot.create(:user, dev: false)
+
+    expect(User.end_user).to include(non_dev_user)
+    expect(User.end_user).to_not include(dev_user)
+  end
+
+  it "only returns approved users through the approved scope" do
+
+    dev_user_good = FactoryBot.create(:user, dev: true, approved: true)
+    dev_user_bad = FactoryBot.create(:user, dev: true, approved: false)
+    non_dev_user_good = FactoryBot.create(:user, dev: false, approved: true)
+    non_dev_user_bad = FactoryBot.create(:user, dev: false, approved: false)
+
+    expect(User.approved).to include(dev_user_good, non_dev_user_good)
+    expect(User.approved).to_not include(dev_user_bad, non_dev_user_bad)
+  end
+
+  it "only returns unapproved users through the not_approved scope" do
+
+    dev_user_good = FactoryBot.create(:user, dev: true, approved: true)
+    dev_user_bad = FactoryBot.create(:user, dev: true, approved: false)
+    non_dev_user_good = FactoryBot.create(:user, dev: false, approved: true)
+    non_dev_user_bad = FactoryBot.create(:user, dev: false, approved: false)
+
+    expect(User.not_approved).to_not include(dev_user_good, non_dev_user_good)
+    expect(User.not_approved).to include(dev_user_bad, non_dev_user_bad)
+  end
+
 end

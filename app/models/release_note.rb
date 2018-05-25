@@ -16,6 +16,15 @@ class ReleaseNote < ApplicationRecord
         intro: intro,
         outro: outro,
         release_date: release_date,
+        release_date_day: release_date.day,
+        release_date_day_name: release_date.strftime("%A"),
+        release_date_month: release_date.month,
+        release_date_month_name: release_date.strftime("%B"),
+        release_date_year: release_date.year,
+        author_first_name: user.first_name,
+        author_last_name: user.last_name,
+        author_nickname: user.nickname,
+        author_job_title: user.job_title,
 
         #release_note_items (has_many)
         release_note_item_types: release_note_items.map{|rni| (rni.change_type.name)},

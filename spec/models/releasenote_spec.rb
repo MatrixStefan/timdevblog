@@ -113,4 +113,23 @@ RSpec.describe ReleaseNote, type: :model do
     expect(@release_note).to be_valid
   end
 
+  it "only returns published release_notes through the published scope" do
+
+    release_note_1 = FactoryBot.create(:release_note, user_id: @user.id, published: true)
+    change_type = FactoryBot.create(:change_type)
+
+    rand(2..5).times do
+      FactoryBot.create(:release_note_item, change_type_id: change_type.id, user_id: @user.id, release_note_id: release_note_1.id)
+    end
+
+    release_note_2 = FactoryBot.create(:release_note, user_id: @user.id, published: false)
+
+    rand(2..5).times do
+      FactoryBot.create(:release_note_item, change_type_id: change_type.id, user_id: @user.id, release_note_id: release_note_2.id)
+    end
+
+    expect(ReleaseNote.published).to include(release_note_1)
+    expect(ReleaseNote.published).to_not include(release_note_2)
+
+  end
 end

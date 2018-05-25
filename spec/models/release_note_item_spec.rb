@@ -35,7 +35,6 @@ RSpec.describe ReleaseNoteItem, type: :model do
     expect(rni.errors[:change_type]).to include("can't be blank")
   end
 
-
   it "is invalid without change_title" do
 
     rni = ReleaseNoteItem.new(
@@ -128,6 +127,110 @@ RSpec.describe ReleaseNoteItem, type: :model do
 
     rni.valid?
     expect(rni.errors[:user]).to include("must exist")
+  end
+
+  it "only returns bug fix items through the bug_fix scope" do
+    max_priority = ChangeType.all.map(&:priority).max
+    newfeature_type = ChangeType.create(name: 'New Feature', icon: 'fa-sun', priority: max_priority+1)
+    enhancement_type = ChangeType.create(name: 'Enhancement', icon: 'fa-thumbs-up', priority: max_priority+2)
+    bug_type = ChangeType.create(name: 'Bug Fix', icon: 'fa-bug', priority: max_priority+3)
+
+    rni_newfeature = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: newfeature_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+    rni_enhancement = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: enhancement_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+    rni_bugfix = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: bug_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+
+    expect(ReleaseNoteItem.bug_fix).to include(rni_bugfix)
+    expect(ReleaseNoteItem.bug_fix).to_not include(rni_newfeature, rni_enhancement)
+  end
+
+  it "only returns enhancement items through the enhancement scope" do
+    max_priority = ChangeType.all.map(&:priority).max
+    newfeature_type = ChangeType.create(name: 'New Feature', icon: 'fa-sun', priority: max_priority+1)
+    enhancement_type = ChangeType.create(name: 'Enhancement', icon: 'fa-thumbs-up', priority: max_priority+2)
+    bug_type = ChangeType.create(name: 'Bug Fix', icon: 'fa-bug', priority: max_priority+3)
+
+    rni_newfeature = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: newfeature_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+    rni_enhancement = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: enhancement_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+    rni_bugfix = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: bug_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+
+    expect(ReleaseNoteItem.enhancement).to include(rni_enhancement)
+    expect(ReleaseNoteItem.enhancement).to_not include(rni_newfeature, rni_bugfix)
+  end
+
+  it "only returns new feature items through the new_feature scope" do
+    max_priority = ChangeType.all.map(&:priority).max
+    newfeature_type = ChangeType.create(name: 'New Feature', icon: 'fa-sun', priority: max_priority+1)
+    enhancement_type = ChangeType.create(name: 'Enhancement', icon: 'fa-thumbs-up', priority: max_priority+2)
+    bug_type = ChangeType.create(name: 'Bug Fix', icon: 'fa-bug', priority: max_priority+3)
+
+    rni_newfeature = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: newfeature_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+    rni_enhancement = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: enhancement_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+    rni_bugfix = ReleaseNoteItem.create(
+        change_title: "Change Title",
+        change_details: "Change Details",
+        change_type_id: bug_type.id,
+        user_id: @user.id,
+        release_note_id: @release_note.id
+    )
+
+    expect(newfeature_type).to be_valid
+    expect(enhancement_type).to be_valid
+    expect(bug_type).to be_valid
+
+    expect(rni_newfeature).to be_valid
+    expect(rni_enhancement).to be_valid
+    expect(rni_bugfix).to be_valid
+
+    expect(ReleaseNoteItem.new_feature).to include(rni_newfeature)
+    expect(ReleaseNoteItem.new_feature).to_not include(rni_enhancement, rni_bugfix)
   end
 
 end

@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :email, :first_name, :last_name, :job_title, presence: true
 
   scope :dev, -> {where(dev: true)}
-  scope :end_user, -> {where(dev false)}
+  scope :end_user, -> {where(dev: false)}
   scope :approved, -> {where(approved: true)}
   scope :not_approved, -> {where(approved: false)}
 
