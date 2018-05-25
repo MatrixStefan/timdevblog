@@ -18,17 +18,25 @@
         <%= f.input :last_name, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
         <%= f.input :nickname, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
         <%= f.input :job_title, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-        <%= f.input :preferred_name, collection: [
-            [resource.first_name, "0"],
-            [resource.last_name, "1"],
-            [resource.nickname, "2"],
-            [[resource.first_name, resource.last_name].join(' '), "3"],
-            [[resource.first_name, '"' + resource.nickname + '"', resource.last_name].join(' '), "4"],
-            [[resource.nickname, resource.first_name].join(' '), "5"],
-            [[resource.nickname, resource.last_name].join(' '), "6"],
-            [[resource.first_name, resource.nickname].join(' '), "7"],
-            [[resource.last_name, resource.nickname].join(' '), "8"]
-        ], include_blank: false, hint:"changes to your name won't show here until you hit save", required: false %>
+        <% if f.object.nickname.blank? %>
+          <%= f.input :preferred_name, collection: [
+              [resource.first_name, "0"],
+              [resource.last_name, "1"],
+              [[resource.first_name, resource.last_name].join(' '), "3"]
+          ], include_blank: false, hint: "changes to your name won't show here until you hit save", required: false %>
+        <% else %>
+          <%= f.input :preferred_name, collection: [
+              [resource.first_name, "0"],
+              [resource.last_name, "1"],
+              [resource.nickname, "2"],
+              [[resource.first_name, resource.last_name].join(' '), "3"],
+              [[resource.first_name, '"' + resource.nickname + '"', resource.last_name].join(' '), "4"],
+              [[resource.nickname, resource.first_name].join(' '), "5"],
+              [[resource.nickname, resource.last_name].join(' '), "6"],
+              [[resource.first_name, resource.nickname].join(' '), "7"],
+              [[resource.last_name, resource.nickname].join(' '), "8"]
+          ], include_blank: false, hint:"changes to your name won't show here until you hit save", required: false %>
+        <% end %>
         <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
         <%= f.input :password_confirmation, required: false %>
       </div>
