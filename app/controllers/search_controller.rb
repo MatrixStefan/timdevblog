@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   def search
+
     if params[:term].nil?
       @release_notes = ReleaseNote.all
       respond_to do |format|
