@@ -20,6 +20,11 @@ class ReleaseNotesController < ApplicationController
           flash[:notice] = 'Release Note created'
           format.html {redirect_to @release_note}
         end
+      else
+        respond_to do |format|
+          flash[:notice] = 'Ummm...?'
+          format.html {render new_release_note_path}
+        end
       end
     rescue ActiveRecord::RecordInvalid => invalid
       respond_to do |format|

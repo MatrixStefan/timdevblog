@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :release_notes
-  has_many :release_note_items
+  has_many :release_notes, :inverse_of => :user
+  has_many :release_note_items, :inverse_of => :user
 
   validates :email, :first_name, :last_name, :job_title, presence: true
 

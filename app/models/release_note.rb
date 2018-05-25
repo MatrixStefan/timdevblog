@@ -1,7 +1,7 @@
 class ReleaseNote < ApplicationRecord
   searchkick
   
-  has_many :release_note_items
+  has_many :release_note_items, :inverse_of => :release_note
   belongs_to :user
 
   accepts_nested_attributes_for :release_note_items, allow_destroy: true, reject_if: :all_blank

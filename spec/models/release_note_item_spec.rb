@@ -22,7 +22,7 @@ RSpec.describe ReleaseNoteItem, type: :model do
     expect(rni).to be_valid
   end
 
-  it "is invalid without change_type_id" do
+  it "is invalid without change_type" do
 
     rni = ReleaseNoteItem.new(
           change_title: "Change Title",
@@ -32,7 +32,7 @@ RSpec.describe ReleaseNoteItem, type: :model do
     )
 
     rni.valid?
-    expect(rni.errors[:change_type_id]).to include("can't be blank")
+    expect(rni.errors[:change_type]).to include("can't be blank")
   end
 
 
@@ -62,7 +62,7 @@ RSpec.describe ReleaseNoteItem, type: :model do
     expect(rni.errors[:change_details]).to include("can't be blank")
   end
 
-  it "is invalid without user_id" do
+  it "is invalid without user" do
 
     rni = ReleaseNoteItem.new(
           change_title: "Change Title",
@@ -72,10 +72,10 @@ RSpec.describe ReleaseNoteItem, type: :model do
     )
 
     rni.valid?
-    expect(rni.errors[:user_id]).to include("can't be blank")
+    expect(rni.errors[:user]).to include("can't be blank")
   end
 
-  it "is invalid without release_note_id" do
+  it "is invalid without release_note" do
 
     rni = ReleaseNoteItem.new(
           change_title: "Change Title",
@@ -85,7 +85,7 @@ RSpec.describe ReleaseNoteItem, type: :model do
     )
 
     rni.valid?
-    expect(rni.errors[:release_note_id]).to include("can't be blank")
+    expect(rni.errors[:release_note]).to include("can't be blank")
   end
 
   it "is invalid when change_type does not exist" do
