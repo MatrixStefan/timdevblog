@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   def search
 
-    if params[:term].nil?
+    if params[:term].nil? || ReleaseNote.count == 0
       @release_notes = ReleaseNote.all
       respond_to do |format|
         flash[:notice] = 'No search results found. Displaying everything...'
