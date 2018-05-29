@@ -9,7 +9,7 @@
       <% if @release_notes.count > 0 %>
         <% @release_notes.order(release_date: :desc, id: :desc).each do |note| %>
 
-          <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'all'} %>
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'Enhancement'} %>
 
         <% end %>
       <% else %>
@@ -23,7 +23,7 @@
       <% if @release_notes.published.count > 0 %>
         <% @release_notes.published.order(release_date: :desc, id: :desc).each do |note| %>
 
-          <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'all'} %>
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'Enhancement'} %>
 
         <% end %>
       <% else %>

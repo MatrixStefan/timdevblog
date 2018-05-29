@@ -10,6 +10,38 @@
 
       <div class="nav-right-panel-col">
         <div class="nav-right-panel-row">
+
+          <div class="dropdown nav-dropdown">
+            <button class="dropbtn dropdown-toggle" type="button" data-toggle="dropdown">
+              <span style="margin: 5px;"><i class="fas fa-eye" aria-hidden="true"></i></span>
+            </button>
+            <ul class="dropdown-menu">
+              <%= link_to release_notes_path do %>
+                <li class="nav-item nav-dropdown-menu-item">
+                  <small>Everything</small>
+                </li>
+              <% end %>
+
+              <%= link_to new_features_path do %>
+                <li class="nav-item nav-dropdown-menu-item">
+                  <small>New Features</small>
+                </li>
+              <% end %>
+
+              <%= link_to enhancements_path do %>
+                <li class="nav-item nav-dropdown-menu-item">
+                  <small>Enhancements</small>
+                </li>
+              <% end %>
+
+              <%= link_to bug_fixes_path do %>
+                <li class="nav-item nav-dropdown-menu-item">
+                  <small>Bug Fixes</small>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
           <% if user_signed_in? %>
 
             <% if current_user.dev %>
@@ -35,7 +67,8 @@
 
         <div class="nav-right-panel-row">
           <div class="nav-bar-item">
-            <small>Hello<% if user_signed_in? %>, <%= current_user.pref_name %><% end %>!</small>
+            <small><% if user_signed_in? %>Hello, <%= current_user.pref_name %>!<% end %>
+            </small>
           </div>
         </div>
       </div>

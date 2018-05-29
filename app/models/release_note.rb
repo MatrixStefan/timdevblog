@@ -9,9 +9,11 @@ class ReleaseNote < ApplicationRecord
   validates :release_date, :title, :user_id, :presence => true
 
   scope :published, -> {where(published: true)}
-  scope :bug_fixes, -> {where("id IN (SELECT release_note_id FROM release_note_items WHERE(change_type_id = (SELECT id FROM change_types WHERE (name = 'Bug Fix'))))")}
-  scope :new_features, -> {where("id IN (SELECT release_note_id FROM release_note_items WHERE(change_type_id = (SELECT id FROM change_types WHERE (name = 'New Feature'))))")}
-  scope :enhancements, -> {where("id IN (SELECT release_note_id FROM release_note_items WHERE(change_type_id = (SELECT id FROM change_types WHERE (name = 'Enhancement'))))")}
+  scope :bug_fixes, -> {joins(release_note_items: :change_type).where("change_types.name = 'Bug Fix'")}
+  scope :new_features, -> {joins(release_note_items: :change_type).where("change_types.name = 'New Feature'")}
+  scope :enhancements, -> {joins(release_note_items: :change_type).where("change_types.name = 'Enhancement'")}
+
+
 
   def search_data
     {

@@ -4,5 +4,9 @@ class ChangeType < ApplicationRecord
 
   validates :name, :icon, presence: true
   validates :priority, presence: true, uniqueness: true
+  
+  def get_type(type)
+    self.find(type)
+  end
 
 end

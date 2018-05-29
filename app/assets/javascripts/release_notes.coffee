@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  collapsibles = document.getElementsByClassName("collapsible");
+
+  $(document).on 'click', '.collapsible', ->
+    this.classList.toggle("active");
+    content = this.nextElementSibling;
+    if (content.style.display == "block")
+      content.style.display = "none"
+      this.querySelector('.indicator').textContent = '+'
+    else
+      content.style.display = "block"
+      this.querySelector('.indicator').textContent = '-'

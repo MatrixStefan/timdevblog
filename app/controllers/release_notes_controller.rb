@@ -1,6 +1,7 @@
 class ReleaseNotesController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_release_note, only: [:show, :edit]
 
   def index
     @release_notes = ReleaseNote.all
@@ -40,11 +41,9 @@ class ReleaseNotesController < ApplicationController
   end
   
   def show
-    set_release_note
   end
 
   def edit
-    set_release_note
   end
 
   def destroy
@@ -110,6 +109,18 @@ class ReleaseNotesController < ApplicationController
       flash[:notice] = 'Notification Sent'
       format.html {redirect_to :release_notes}
     end
+  end
+
+  def new_features
+    @release_notes = ReleaseNote.new_features
+  end
+
+  def enhancements
+    @release_notes = ReleaseNote.enhancements
+  end
+
+  def bug_fixes
+    @release_notes = ReleaseNote.bug_fixes
   end
   
   private

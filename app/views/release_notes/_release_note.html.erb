@@ -22,33 +22,40 @@
 
     <% release_note.release_note_items.joins(:change_type).order("priority").map(&:change_type_id).uniq.each do |type| %>
 
-      <div class="release-note-type">
+      <% release_note_items = release_note.release_note_items.where("change_type_id = ?", type) %>
+      <% change_type_name = release_note_items.first.change_type.name %>
+      <% auto_show = shown_type == 'all' || shown_type == change_type_name %>
+
+      <button class="release-note-type collapsible">
         <span class="fa-stack">
-          <i class="fas <%= ChangeType.find(type).icon %> fa-stack-2x"></i>
+          <i class="fas <%= release_note_items.first.change_type.icon %> fa-stack-2x"></i>
         </span>
-        <%= ChangeType.find(type).name.pluralize(2) %>
+        <%= change_type_name.pluralize(release_note_items.count) %>
+        <span class="indicator pull-right"><%= auto_show ? '-' : '+' %></span>
+      </button>
+
+      <div class="content" style="<%= auto_show ? 'display:block' : 'display:none' %>">
+        <% release_note_items.each do |item| %>
+
+          <div class="release-note-item-row">
+            <div class="release-note-item-icon">
+              <i class="fas <%= item.change_type.icon %>"></i>
+            </div>
+            <div class="release-note-item-col">
+              <div class="release-note-item-title">
+                <%= item.change_title %>
+              </div>
+              <div class="release-note-item-details">
+                <%= item.change_details.html_safe %>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
       </div>
 
-      <% release_note.release_note_items.where("change_type_id = ?", type).each do |item| %>
-
-        <div class="release-note-item-row">
-          <div class="release-note-item-icon">
-            <i class="fas <%= item.change_type.icon %>"></i>
-          </div>
-          <div class="release-note-item-col">
-            <div class="release-note-item-title">
-              <%= item.change_title %>
-            </div>
-            <div class="release-note-item-details">
-              <%= item.change_details.html_safe %>
-            </div>
-          </div>
-        </div>
-
-      <% end %>
-
     <% end %>
-    
+
   </div>
 
   <div class="release-note-row">
@@ -56,10 +63,10 @@
       <%= release_note.outro.html_safe %>
     </div>
   </div>
-  
+
   <div class="release-note-row">
     <div class="release-note-signed-by">
-      <hr />
+      <hr/>
       <%= release_note.user.pref_name %>, <%= release_note.user.job_title %>
     </div>
   </div>
