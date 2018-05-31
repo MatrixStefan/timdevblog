@@ -99,7 +99,8 @@ class ReleaseNotesController < ApplicationController
 
       url = URI.parse(domain)
       req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
-      req.body = { origin: "TIM-Release-Notes", title: release_note.title, rnid: release_note.id, icon_emoji: ":beers:", text: "*There's a new version of TIM!*" + "\nHave a read through the release notes:\n <" + through_link  + "|" + release_note.title + "&gt;"}.to_json
+      req.body = {text:"Basic test"}.to_json
+      #req.body = { origin: "TIM-Release-Notes", title: release_note.title, rnid: release_note.id, icon_emoji: ":beers:", text: "*There's a new version of TIM!*" + "\nHave a read through the release notes:\n <" + through_link  + "|" + release_note.title + "&gt;"}.to_json
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
       response = http.request(req)
