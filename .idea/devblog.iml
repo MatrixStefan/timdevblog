@@ -113,6 +113,7 @@
     <orderEntry type="library" scope="PROVIDED" name="searchkick (v3.1.0, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v3.12.0, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simple_form (v4.0.0, RVM: ruby-2.3.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="slack-notifier (v2.3.2, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring (v2.0.2, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring-commands-rspec (v1.0.4, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring-watcher-listen (v2.0.1, RVM: ruby-2.3.3) [gem]" level="application" />

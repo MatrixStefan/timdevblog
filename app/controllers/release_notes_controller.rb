@@ -90,12 +90,11 @@ class ReleaseNotesController < ApplicationController
 
     puts 'Domains: ' + domains[0]
     puts 'Domains: ' + domains[1]
+    through_link =  ENV['TIM_RELEASE_NOTES_URL'] + "/release_notes/" + release_note.id.to_s
 
-    domains.each do |domain|
+    domains.first do |domain|
 
       puts 'Domain: ' + domain.to_s
-
-      through_link =  ENV['TIM_RELEASE_NOTES_URL'] + "/release_notes/" + release_note.id.to_s
 
       url = URI.parse(domain)
       req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
@@ -110,6 +109,18 @@ class ReleaseNotesController < ApplicationController
       puts "response #{response.body}"
 
     end
+
+    notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
+    attachment_payload = {
+        "fields": [
+            {
+                "title": "There's a new version of TIM!",
+                "value": "<#{through_link} |#{release_note.title}>",
+                "short": false
+            }
+        ]
+    }
+    notifier.ping attachments: [attachment_payload]
 
     respond_to do |format|
       flash[:notice] = 'Notification Sent'
