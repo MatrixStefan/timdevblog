@@ -111,16 +111,17 @@ class ReleaseNotesController < ApplicationController
     end
 
     notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
+
     attachment_payload = {
         "fields": [
             {
                 "title": "There's a new version of TIM!",
-                "value": "<#{through_link} |#{release_note.title}>",
+                "value": "Have a read through the release notes:\n<#{through_link} |#{release_note.title}>",
                 "short": false
             }
         ]
     }
-    notifier.ping attachments: [attachment_payload]
+    notifier.post icon_emoji: ":beers:", attachments: [attachment_payload]
 
     respond_to do |format|
       flash[:notice] = 'Notification Sent'
