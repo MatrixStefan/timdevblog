@@ -6,5 +6,9 @@ FactoryBot.define do
     outro { Faker::RickAndMorty.quote }
     published false
   end
+  
+  trait :published do
+    published true
+  end
 end
 

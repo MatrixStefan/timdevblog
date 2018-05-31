@@ -85,25 +85,28 @@ class ReleaseNotesController < ApplicationController
 
   def notify
     release_note = set_release_note
-    domain = ENV['TIM_URL']
 
-    puts 'Domain: ' + domain.to_s
+    domains = ENV['WEBHOOK_URLS'].split(',')
 
-    url = URI.parse(domain) + '/receive_webhooks'
-    req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
-    req.body = { origin: "TIM-Release-Notes", title: release_note.title, rnid: release_note.id}.to_json
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = (url.scheme == "https")
-    response = http.request(req)
+    puts 'Domains: ' + domains[0]
+    puts 'Domains: ' + domains[1]
 
+    domains.each do |domain|
 
-    #uri = URI(url)
-    #req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
-    #n
+      puts 'Domain: ' + domain.to_s
 
-    puts "request #{req.body}"
+      url = URI.parse(domain)
+      req = Net::HTTP::Post.new(url.request_uri, 'Content-Type' => 'application/json', 'x-tim-release-note' => tim_rn_signature)
+      req.body = { origin: "TIM-Release-Notes", title: release_note.title, rnid: release_note.id, icon_emoji: ":beers:", text: "*There's a new version of TIM!*" + "\nHave a read through the release notes:\n <http://0.0.0.0:3001/release_notes/" + release_note.id.to_s + "|" +  + release_note.title + ">"}.to_json
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = (url.scheme == "https")
+      response = http.request(req)
 
-    puts "response #{response.body}"
+      puts "request #{req.body}"
+
+      puts "response #{response.body}"
+
+    end
 
     respond_to do |format|
       flash[:notice] = 'Notification Sent'
