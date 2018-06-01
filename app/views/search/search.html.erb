@@ -48,7 +48,7 @@
       <% if user_signed_in? %>
         <% @search_results.each do |note| %>
 
-          <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+          <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'all'} %>
 
         <% end %>
       <% else %>
@@ -57,7 +57,7 @@
 
           <% if note.published %>
 
-            <%= render partial: 'release_notes/release_note', locals: {release_note: note} %>
+            <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'all'} %>
 
           <% end %>
 
