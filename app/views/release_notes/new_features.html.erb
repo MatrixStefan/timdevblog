@@ -7,7 +7,7 @@
   <div class="index-articles">
     <% if user_signed_in? && current_user.dev %>
       <% if @release_notes.count > 0 %>
-        <% @release_notes.order(release_date: :desc, id: :desc).each do |note| %>
+        <% @release_notes.order(release_date: :desc, id: :desc).uniq.each do |note| %>
 
           <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'New Feature'} %>
 
@@ -21,7 +21,7 @@
     <% else %>
 
       <% if @release_notes.published.count > 0 %>
-        <% @release_notes.published.order(release_date: :desc, id: :desc).each do |note| %>
+        <% @release_notes.published.order(release_date: :desc, id: :desc).uniq.each do |note| %>
 
           <%= render partial: 'release_notes/release_note', locals: {release_note: note, shown_type: 'New Feature'} %>
 
