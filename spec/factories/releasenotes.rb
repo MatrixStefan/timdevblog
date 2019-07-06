@@ -4,11 +4,11 @@ FactoryBot.define do
     release_date { Faker::Date.between(1.years.ago, Date.today) }
     intro { Faker::StarWars.quote }
     outro { Faker::RickAndMorty.quote }
-    published false
+    published {false}
   end
   
   trait :published do
-    published true
+    published {true}
   end
 end
 
