@@ -105,7 +105,7 @@ class ReleaseNotesController < ApplicationController
 
     end
 
-    notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
+    notifier = Slack::Notifier.new Rails.application.credentials[:slack][:general]
 
     attachment_payload = {
         "fields": [
