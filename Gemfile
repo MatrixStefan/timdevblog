@@ -19,7 +19,9 @@ gem 'simple_form'
 
 gem 'cocoon'
 
-gem 'searchkick'
+gem 'searchkick', '3.1.0'
+gem 'elasticsearch', '~> 6.2.0'
+
 
 gem 'faker'
 
